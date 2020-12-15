@@ -1,0 +1,567 @@
+{
+	"info": {
+		"_postman_id": "497ec048-c00f-4395-ba1f-277de2cf4a9b",
+		"name": "HH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Successful Requests",
+			"item": [
+				{
+					"name": "Get All Vacancies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b745cf32-ccab-4b5c-b90e-91ed96a31178",
+								"exec": [
+									"pm.test(\"Found all vacancies\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Simple Text Vacancy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0cf67539-563f-49ef-9256-060d618eb559",
+								"exec": [
+									"pm.test(\"Found simple text vacancies\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"    pm.globals.set(\"simple_text_found\", jsonData.found);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=frontend разработчик",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "frontend разработчик"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Phrase Text Vacancy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c8e46b40-c983-48df-93a8-ab3849aed98f",
+								"exec": [
+									"pm.test(\"Found phrase text vacancy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"    pm.globals.set(\"phrase_text_found\", jsonData.found);    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Phrase vacancies number is less than simple vacancies number\", function () {\r",
+									"    pm.expect(pm.globals.get(\"phrase_text_found\")).to.be.at.most(pm.globals.get(\"simple_text_found\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=\"frontend разработчик\"",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "\"frontend разработчик\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Particular Text Vacancy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f8c6851-3495-4a1f-a43c-95c49efc3abd",
+								"exec": [
+									"pm.test(\"Found particular text vacancy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"    pm.globals.set(\"particular_text_found\", jsonData.found);    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Particular vacancies number is less than phrase vacancies number\", function () {\r",
+									"    pm.expect(pm.globals.get(\"particular_text_found\")).to.be.at.most(pm.globals.get(\"phrase_text_found\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=!\"frontend разработчик\"",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "!\"frontend разработчик\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Excluding Text Vacancy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d73ab71c-c7e5-4068-a3b1-f16863f70e5b",
+								"exec": [
+									"pm.test(\"Found excluding text vacancy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"    pm.globals.set(\"excluding_text_found\", jsonData.found);    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Excluding vacancies number is less than particular vacancies number\", function () {\r",
+									"    pm.expect(pm.globals.get(\"excluding_text_found\")).to.be.at.most(pm.globals.get(\"particular_text_found\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=!\"frontend разработчик\" NOT React",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "!\"frontend разработчик\" NOT React"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Text Vacancy With OR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac2c778c-fb8b-468d-86db-f7f53ddb3c92",
+								"exec": [
+									"pm.test(\"Found text vacancy with OR\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"    pm.globals.set(\"OR_text_found\", jsonData.found);    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=angular OR react",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "angular OR react"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Text Vacancy With AND",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "87105a4b-9135-4f12-94b9-1292c682cdd3",
+								"exec": [
+									"pm.test(\"Found text vacancy with AND\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.found).to.not.equal(0);\r",
+									"    pm.globals.set(\"and_text_found\", jsonData.found);    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"OR vacancies number is not equal to AND vacancies number\", function () {\r",
+									"    pm.expect(pm.globals.get(\"OR_text_found\")).to.not.be.equal(pm.globals.get(\"and_text_found\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=angular AND react",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "angular AND react"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Simple Text Vacancy With Company Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6289a58c-2ba2-425b-a1eb-0c38fcf218c1",
+								"exec": [
+									"pm.globals.set(\"simple_text_with_company_name_found\", pm.response.json().found); \r",
+									"\r",
+									"pm.test(\"vacancies number with company name is less than vacancies number\", function () {\r",
+									"    pm.expect(pm.globals.get(\"simple_text_with_company_name_found\")).to.be.at.most(pm.globals.get(\"simple_text_found\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8P",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=NAME:(frontend разработчик) and COMPANY_NAME:Headhunter",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "NAME:(frontend разработчик) and COMPANY_NAME:Headhunter"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9f6bb731-7e31-4fca-b9f9-bf5fbfd28788",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "70be9fca-e54a-4731-a44f-a3a78920723f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has items field\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('items');",
+							"});",
+							"",
+							"pm.test(\"Response has items field that is array type\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.items).to.be.an('array');",
+							"});"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Failed Requests",
+			"item": [
+				{
+					"name": "Bad Authorization Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "640b0744-407f-4f27-a6a7-3f36f7187285",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Authorization error's correct description\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"bad_authorization\");    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "JOIN9M0LTBRLMF0S1JBLA2VUSFHAPSJF63PGT89P96D6HGNNHALD7QL2PSTKUD8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.hh.ru/vacancies?text=frontend разработчик",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hh",
+								"ru"
+							],
+							"path": [
+								"vacancies"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "frontend разработчик"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6a2cef0b-a8ea-49d3-b800-7f6ddb79c594",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "cb691f53-6e6e-4abb-a7af-5e9d4b590cb3",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 3 seconds\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+					"});",
+					"",
+					"pm.test(\"Response type is a json\", function () {",
+					"\tpm.response.to.be.json;",
+					"});",
+					"",
+					"pm.test(\"Content-Type is application/json\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=UTF-8\");",
+					"});"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
